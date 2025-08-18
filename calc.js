@@ -61,7 +61,8 @@ btns.forEach((btn) => {
       exp.length === 1 &&
       !isVal(val) &&
       val !== "=" &&
-      val !== "clear"
+      val !== "clear" &&
+      exp[0].length < 9
     ) {
       exp[0] += val;
       screen.textContent = exp[0];
@@ -84,8 +85,10 @@ btns.forEach((btn) => {
       exp.length === 3 &&
       !isVal(val) &&
       val !== "=" &&
-      val !== "clear"
+      val !== "clear" &&
+      exp[2].length < 9
     ) {
+      console.log(exp[2].length);
       exp[2] += val;
       screen.textContent = exp[2];
     } else if (
@@ -94,7 +97,16 @@ btns.forEach((btn) => {
       val !== "clear"
     ) {
       exp[0] = operate(Number(exp[0]), Number(exp[2]), exp[1]);
-      screen.textContent = exp[0];
+      if (exp[0].toString().length > 8 && exp[0] > 1) {
+        console.log("hello");
+        screen.textContent = "Too Large";
+      } else if (exp[0].toString().length > 8 && exp[0] < 1) {
+        console.log("hello");
+        screen.textContent = "Too Small";
+      } else {
+        console.log(exp[0]);
+        screen.textContent = exp[0];
+      }
       stop = true;
       exp.pop();
       exp.pop();
