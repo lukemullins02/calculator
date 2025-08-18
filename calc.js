@@ -21,7 +21,7 @@ function divide(a, b) {
 
 let a = "";
 let b = "";
-let operator;
+let operator = "";
 
 function operate(a, b, operator) {
   if (operator === "+") {
@@ -35,23 +35,42 @@ function operate(a, b, operator) {
   }
 }
 
+let exp = [];
+let ans = 0;
+
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    if (btn.textContent === "clear") {
-      screen.textContent = "";
-    } else {
-      if (
-        btn.textContent === "+" ||
+    if (exp.length === 0) {
+      exp.push(btn.textContent);
+    } else if (
+      exp.length === 1 &&
+      btn.textContent !== "+" &&
+      btn.textContent !== "-" &&
+      btn.textContent !== "*" &&
+      btn.textContent !== "/"
+    ) {
+      exp[0] += btn.textContent;
+      screen.textContent = exp[0];
+      console.log(exp);
+    } else if (
+      exp.length === 1 &&
+      (btn.textContent === "+" ||
         btn.textContent === "-" ||
-        btn.textContent === "/" ||
-        btn.textContent === "*"
-      ) {
-        screen.textContent = "";
-        console.log(a);
-      } else {
-        a += btn.textContent;
-        screen.textContent += btn.textContent;
-      }
+        btn.textContent === "*" ||
+        btn.textContent === "/")
+    ) {
+      exp.push(btn.textContent);
+    } else if (exp.length === 2) {
+      exp.push(btn.textContent);
+    } else if (exp.length === 3 && btn.textContent !== "=") {
+      exp[2] += btn.textContent;
+      console.log(exp);
+    } else if (exp.length === 3 && btn.textContent === "=") {
+      exp[0] = operate(Number(exp[0]), Number(exp[2]), exp[1]);
+      screen.textContent = exp[0];
+      console.log(exp[0]);
+      exp.pop();
+      exp.pop();
     }
   });
 });
