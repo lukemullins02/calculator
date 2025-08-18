@@ -42,12 +42,14 @@ btns.forEach((btn) => {
   btn.addEventListener("click", () => {
     if (exp.length === 0) {
       exp.push(btn.textContent);
+      screen.textContent = btn.textContent;
     } else if (
       exp.length === 1 &&
       btn.textContent !== "+" &&
       btn.textContent !== "-" &&
       btn.textContent !== "*" &&
-      btn.textContent !== "/"
+      btn.textContent !== "/" &&
+      btn.textContent !== "="
     ) {
       exp[0] += btn.textContent;
       screen.textContent = exp[0];
@@ -62,9 +64,10 @@ btns.forEach((btn) => {
       exp.push(btn.textContent);
     } else if (exp.length === 2) {
       exp.push(btn.textContent);
+      screen.textContent = exp[2];
     } else if (exp.length === 3 && btn.textContent !== "=") {
       exp[2] += btn.textContent;
-      console.log(exp);
+      screen.textContent = exp[2];
     } else if (exp.length === 3 && btn.textContent === "=") {
       exp[0] = operate(Number(exp[0]), Number(exp[2]), exp[1]);
       screen.textContent = exp[0];
