@@ -1,3 +1,8 @@
+const btns = document.querySelectorAll("button");
+const screen = document.querySelector(".screen");
+
+console.log(btns);
+
 function add(a, b) {
   return a + b;
 }
@@ -14,8 +19,8 @@ function divide(a, b) {
   return a / b;
 }
 
-let a;
-let b;
+let a = "";
+let b = "";
 let operator;
 
 function operate(a, b, operator) {
@@ -30,4 +35,23 @@ function operate(a, b, operator) {
   }
 }
 
-console.log(operate(2, 5, "+"));
+btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.textContent === "clear") {
+      screen.textContent = "";
+    } else {
+      if (
+        btn.textContent === "+" ||
+        btn.textContent === "-" ||
+        btn.textContent === "/" ||
+        btn.textContent === "*"
+      ) {
+        screen.textContent = "";
+        console.log(a);
+      } else {
+        a += btn.textContent;
+        screen.textContent += btn.textContent;
+      }
+    }
+  });
+});
