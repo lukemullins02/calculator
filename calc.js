@@ -45,6 +45,15 @@ btns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const val = btn.textContent;
 
+    if (stop) {
+      if (isVal(val) && val !== "=" && val !== "clear") {
+        stop = false;
+      } else if (!isVal(val) && val !== "=" && val !== "clear") {
+        exp = [];
+        stop = false;
+      }
+    }
+
     if (exp.length === 0 && !isVal(val) && val !== "=" && val !== "clear") {
       exp.push(val);
       screen.textContent = val;
@@ -86,6 +95,7 @@ btns.forEach((btn) => {
     ) {
       exp[0] = operate(Number(exp[0]), Number(exp[2]), exp[1]);
       screen.textContent = exp[0];
+      stop = true;
       exp.pop();
       exp.pop();
     } else if (val === "clear") {
