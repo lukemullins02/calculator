@@ -109,13 +109,10 @@ btns.forEach((btn) => {
 
       if (exp[0] === Infinity) {
         screen.textContent = "Seriously?";
-        console.log("hello");
       } else if (exp[0].toString().length > 8 && exp[0] > 1) {
-        console.log("hello");
         screen.textContent = "Too Large";
       } else if (exp[0].toString().length > 8 && exp[0] < 1) {
-        console.log("hello");
-        screen.textContent = "Too Small";
+        screen.textContent = exp[0].toFixed(7);
       } else {
         screen.textContent = exp[0];
       }
